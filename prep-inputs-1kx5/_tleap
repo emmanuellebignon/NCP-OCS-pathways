@@ -1,0 +1,14 @@
+source leaprc.DNA.bsc1.cufix
+source leaprc.water.tip3p
+source leaprc.protein.ff14SB
+loadamberparams frcmod.ff99cufix
+
+a = loadpdb 1kx5.pdb
+
+solvateoct a TIP3PBOX 20.0
+addionsrand a Na+ 404 Cl- 262
+
+savepdb a 1kx5_box.pdb
+saveamberparm a 1kx5_box.prmtop 1kx5_box.inpcrd
+quit
+
