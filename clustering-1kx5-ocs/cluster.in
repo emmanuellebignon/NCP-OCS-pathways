@@ -1,0 +1,12 @@
+parm ../../ncp-OCS_dry.prmtop
+trajin ../../ncp-OCS_MD1_dry.dcd 1 last 5
+trajin ../../ncp-OCS_MD2_dry.dcd 1 last 5
+trajin ../../ncp-OCS_MD3_dry.dcd 1 last 5
+trajin ../../ncp-OCS_MD4_dry.dcd 1 last 5
+trajin ../../ncp-OCS_MD5_dry.dcd 1 last 5
+trajin ../../ncp-OCS_MD6_dry.dcd 1 last 5
+
+autoimage
+
+cluster hieragglo averagelinkage rms :337-429,824-916 out cnumvtime.dat summaryhalf summary.dat cpopvtime pop.dat normframe repout rep repfmt pdb
+

@@ -1,0 +1,11 @@
+parm ../../1kx5_dry.prmtop
+trajin ../../1kx5_box_MD1_dry.dcd 1 last 5
+trajin ../../1kx5_box_MD2_dry.dcd 1 last 5
+trajin ../../1kx5_box_MD3_dry.dcd 1 last 5
+trajin ../../1kx5_box_MD4_dry.dcd 1 last 5
+trajin ../../1kx5_box_MD5_dry.dcd 1 last 5
+trajin ../../1kx5_box_MD6_dry.dcd 1 last 5
+
+autoimage
+cluster hieragglo averagelinkage rms :337-429,824-916 out cnumvtime.dat summaryhalf summary.dat cpopvtime pop.dat normframe repout rep repfmt pdb
+
