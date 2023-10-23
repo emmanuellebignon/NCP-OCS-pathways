@@ -1,0 +1,27 @@
+remark goes here
+MASS
+SO 32.06 !all_modrna08.frcmod
+
+BOND
+2C-SO    225.8   1.794   !same as c3-ss, all_modrna08.frcmod
+SO-O     398.5   1.454   !same as o -ss, all_modrna08.frcmod
+
+ANGLE
+CX-2C-SO    61.1    112.92  !same as c3-c3-ss, all_modrna08.frcmod
+2C-SO-O     64.7    104.221 !same as c3-ss-o, all_modrna08.frcmod
+SO-2C-H1    42.5    107.041 !same as hc-c3-ss, all_modrna08.frcmod
+O -SO-O     69.8    114.173 !same as o -ss-o, all_modrna08.frcmod
+
+DIHE
+N -CX-2C-SO   1    0.156         0.000           3.000      !same as X -c3-c3-X
+CX-2C-SO-O    1    0.333         0.000           3.000      !same as X -c3-ss-X
+C -CX-2C-SO   1    0.156         0.000           3.000      !same as X -c3-c3-X
+SO-2C-CX-H1   1    0.156         0.000           3.000      !same as X -c3-c3-X
+H1-2C-SO-O    1    0.333         0.000           3.000      !same as X -c3-ss-X
+
+IMPROPER
+
+NONBON
+  SO          2.0000  0.2500             !same as ss, all_modrna08.frcmod
+
+
