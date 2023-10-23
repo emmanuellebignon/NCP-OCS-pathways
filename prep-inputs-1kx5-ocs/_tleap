@@ -1,0 +1,19 @@
+source leaprc.DNA.bsc1.cufix
+source leaprc.water.tip3p
+source leaprc.protein.ff14SB
+loadamberparams frcmod.ff99cufix
+loadoff ./OCS.lib
+loadamberparams ./OCS.frcmod
+
+a = loadpdb ncp-ocs.pdb
+
+select a.404
+relax a.404
+
+solvateoct a TIP3PBOX 20.0
+addionsrand a Na+ 378 Cl- 233
+
+savepdb a ncp-OCS.pdb
+saveamberparm a ncp-OCS.prmtop ncp-OCS.inpcrd
+quit
+
