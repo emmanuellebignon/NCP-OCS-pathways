@@ -1,0 +1,134 @@
+CUDASOAintegrate off
+
+margin 4
+
+amber on
+switching 	off
+exclude 	scaled1-4
+1-4scaling 	0.833333333
+scnb 		2.0
+readexclusions 	yes
+cutoff 		9
+pairListDist 	11
+LJcorrection 	on
+
+
+#Input/Output file names
+
+set pdb_file 1kx5_box
+set fix_file 1kx5_box
+set prmtop_file 1kx5_box
+
+set outputname   1kx5_box_eq
+restartname  1kx5_box_eq
+
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+## NAMD RUN AJUSTABLES PARAMETERS %
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+## temperature
+set temperature    300
+
+## minimisation steps
+set minim 30000
+
+## duration of the simulation
+set duration 5000000
+
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+parmfile $prmtop_file.prmtop
+coordinates      $pdb_file.pdb
+
+
+binaryrestart no
+outputTiming 2500
+
+temperature $temperature
+
+# Integrator Parameters
+timestep            2.0
+nonbondedFreq       1
+fullElectFrequency  2
+stepspercycle       20
+
+rigidBonds          	all
+rigidtolerance      	1.0e-8
+rigiditerations     	100
+usesettle 		on
+
+# Constant Temperature Control
+
+ langevin             on
+ langevintemp         300.0
+ langevindamping      1.0
+
+
+ # CONSTANT-P
+
+ langevinpiston       on
+ langevinpistontarget 1
+ langevinpistonperiod 100
+ langevinpistondecay   50
+ langevinpistontemp   300
+
+ StrainRate           0.0 0.0 0.0
+
+
+ # PME
+
+ PME                  yes
+ PMETolerance         10e-6
+ PMEInterpOrder       4
+ PMEGridSpacing       1
+
+
+
+# Periodic Boundary Conditions 186.6613907 186.6613907 186.6613907
+
+cellBasisVector1 177 0 0
+cellBasisVector2 59 166.9 0
+cellBasisVector3 -59 83.4 144.5
+
+wrapWater           on
+wrapAll             on
+wrapnearest         on
+
+
+useGroupPressure      yes  
+useFlexibleCell       no   
+useConstantArea       no
+useConstantRatio      no
+
+# Output
+outputName          $outputname
+restartfreq         25000
+dcdfreq             25000
+xstFreq             25000
+outputEnergies      25000
+outputPressure      25000
+
+DCDunitcell         yes
+
+
+constraints on
+
+consexp 2
+consref $pdb_file.pdb
+conskfile $fix_file.fix
+conskcol B
+
+#%%%%%%%%%%%%%%%%%%%
+# EXECUTION SCRIPT %
+#%%%%%%%%%%%%%%%%%%%
+constraintScaling 1
+minimize $minim
+run 5000000
+constraintScaling 0.5
+run 5000000
+constraintScaling 0.1
+run 5000000
+constraintScaling 0
+run $duration
+

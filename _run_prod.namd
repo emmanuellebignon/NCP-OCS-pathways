@@ -1,0 +1,106 @@
+CUDASOAintegrate on
+
+margin 4
+
+
+amber on
+switching 	off
+exclude 	scaled1-4
+1-4scaling 	0.833333333
+scnb 		2.0
+readexclusions 	yes
+cutoff 		9
+pairListDist 	11
+LJcorrection 	on
+
+
+#Input/Output file names
+
+set prmtop_file 1kx5_box_hmr
+
+set outputname   1kx5_box_prod
+restartname  1kx5_box_prod
+
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+## NAMD RUN AJUSTABLES PARAMETERS %
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+## duration of the simulation 
+set duration 1000000000
+
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+parmfile $prmtop_file.prmtop
+coordinates     1kx5_box_eq.coor
+velocities      1kx5_box_eq.vel
+extendedSystem  1kx5_box_eq.xsc
+
+
+binaryrestart no
+outputTiming 2500
+
+
+# Integrator Parameters
+timestep            4.0
+nonbondedFreq       1
+fullElectFrequency  2
+stepspercycle       20
+
+rigidBonds          	all
+rigidtolerance      	1.0e-8
+rigiditerations     	100
+usesettle 		on
+
+# Constant Temperature Control
+
+ langevin             on
+ langevintemp         300.0
+ langevindamping      1.0
+
+
+ # CONSTANT-P
+
+ langevinpiston       on
+ langevinpistontarget 1
+ langevinpistonperiod 100
+ langevinpistondecay   50
+ langevinpistontemp   300
+
+ StrainRate           0.0 0.0 0.0
+
+
+ # PME
+
+ PME                  yes
+ PMETolerance         10e-6
+ PMEInterpOrder       4
+ PMEGridSpacing       1
+
+
+# Periodic Boundary Conditions 186.6613907 186.6613907 186.6613907
+
+wrapWater           on
+wrapAll             on
+wrapnearest         on
+
+useGroupPressure      yes  
+useFlexibleCell       no  
+useConstantArea       no
+useConstantRatio      no
+
+# Output
+outputName          $outputname
+restartfreq         25000
+dcdfreq             25000
+xstFreq             25000
+outputEnergies      25000
+outputPressure      25000
+
+DCDunitcell         yes
+
+%%%%%%%%%%%%%%%%%%%
+# EXECUTION SCRIPT %
+#%%%%%%%%%%%%%%%%%%%
+run $duration
+
