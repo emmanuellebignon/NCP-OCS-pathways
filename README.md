@@ -32,3 +32,6 @@ ncp-OCS_hmr.prmtop.zip: topology file with HMR
 ncp-OCS.pdb.zip: pdb file
 
 ncp-OCS.fix.zip: pdb file with labels in the B-factor column for restraints during the equilibration
+
+## In Pathways.tgz ##
+Raw data about computed communications pathways, including the list of hubs in each pathway.
